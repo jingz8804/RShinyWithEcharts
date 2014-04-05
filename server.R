@@ -44,7 +44,7 @@ shinyServer(function(input, output, session) {
       readOnly = FALSE
       mark = TRUE
       dataZoom = FALSE
-      magicType = TRUE
+      magicType = F
       
       calculable <- T
       pie.data <- data.frame(name=c('S1', 'S2', 'S3', 'S4', 'S5'), 
@@ -75,7 +75,7 @@ shinyServer(function(input, output, session) {
       readOnly = FALSE
       mark = TRUE
       dataZoom = FALSE
-      magicType = TRUE
+      magicType = F
       
       calculable <- T
       pie.data <- data.frame(name=c('S1', 'S2'), value=c(123, 234))
@@ -88,16 +88,16 @@ shinyServer(function(input, output, session) {
     opt$calculable = calculableSet(calculable = calculable)
     opt$tooltip = tooltipSet(tooltip = tooltip, trigger = tooltip.trigger, 
                              formatter = formatter, islandFormatter = "")
-    opt$toolbox = list(show=T, feature=list(
-        mark=list(show=T),
-        dataView=list(show=T,readOnly=F),
-        restore=list(show=T),
-        saveAsImage=list(show=T)
-      ))
-#     opt$toolbox = toolboxSet(toolbox = toolbox, toolbox.x = toolbox.x, 
-#                              toolbox.y = toolbox.y, orient = toolbox.orient, dataView = dataView, 
-#                              mark = mark, dataZoom = dataZoom, magicType = magicType, 
-#                              restore = TRUE, readOnly = readOnly, saveAsImage = TRUE)
+#     opt$toolbox = list(show=T, feature=list(
+#         mark=list(show=T),
+#         dataView=list(show=T,readOnly=F),
+#         restore=list(show=T),
+#         saveAsImage=list(show=T)
+#       ))
+    opt$toolbox = toolboxSet(toolbox = toolbox, toolbox.x = toolbox.x, 
+                             toolbox.y = toolbox.y, orient = toolbox.orient, dataView = dataView, 
+                             mark = mark, dataZoom = dataZoom, magicType = magicType, 
+                             restore = TRUE, readOnly = readOnly, saveAsImage = TRUE)
     opt$legend = legendSet(legend = legend, data = legend.data, 
                            legend.x = legend.x, legend.y = legend.y, orient = legend.orient)
     dataList = split(pie.data, 1:dim(pie.data)[1])

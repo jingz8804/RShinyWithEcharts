@@ -58,63 +58,163 @@ tooltipSet = function(tooltip, trigger=c("item","axis"), formatter="", islandFor
   return(returnList)
 }
 
-toolboxSet = function(toolbox=TRUE, toolbox.x="left", toolbox.y="top", orient=c("horizontal", "vertical"), 
-                      dataView=TRUE, readOnly=TRUE, mark = TRUE, restore=TRUE, dataZoom=FALSE, saveAsImage=TRUE, magicType=FALSE)
-{
-  if (magicType){
-    magicType = c("line", "bar")
-  }else{
-    magicType <- "false"
-  }
-  
+# toolboxSet = function(toolbox=TRUE, toolbox.x="left", toolbox.y="top", orient=c("horizontal", "vertical"), 
+#                       dataView=TRUE, readOnly=TRUE, mark = TRUE, restore=TRUE, dataZoom=FALSE, saveAsImage=TRUE, magicType=FALSE)
+# {
+#   if (magicType){
+#     magicType = c("line", "bar")
+#   }else{
+#     magicType <- "false"
+#   }
+#   
+#   if (!dataView){
+#     returnList <- list(
+#       show = ifelse(toolbox, "true", "false"),
+#       x = matchPos.x(toolbox.x), 
+#       y = matchPos.y(toolbox.y),
+#       orient = match.arg(orient),
+#       feature = list(
+#         mark = list(
+#           show = ifelse(mark, "true", "false"),
+#           title = list(
+#             mark = 'Auxiliry Line Switch',
+#             markUndo = 'Remove Auxiliry Line',
+#             markClear = 'Clear All Auxiliry Lines'
+#           )),
+#         dataZoom = ifelse(dataZoom, "true", "false"),
+#         magicType = magicType,
+#         restore = list(show=ifelse(restore, "true", "false"),
+#                        title='Restore'),
+#         saveAsImage = ifelse(saveAsImage, "true", "false")
+#       )
+#     )
+#   }else{
+#     returnList <- list(
+#       show = ifelse(toolbox, "true", "false"),
+#       x = matchPos.x(toolbox.x), 
+#       y = matchPos.y(toolbox.y),
+#       orient = match.arg(orient),
+#       feature = list(
+#         mark = list(
+#           show = ifelse(mark, "true", "false"),
+#           title = list(
+#             mark = 'Auxiliry Line Switch',
+#             markUndo = 'Remove Auxiliry Line',
+#             markClear = 'Clear All Auxiliry Lines'
+#             )),
+#         dataZoom = ifelse(dataZoom, "true", "false"),
+#         magicType = magicType,
+#         restore = list(show=ifelse(restore, "true", "false"),
+#                        title='Restore'),
+#         dataView = list(readOnly = ifelse(readOnly, "true", "false")),
+#         saveAsImage = ifelse(saveAsImage, "true", "false")
+#       )
+#     )
+#   }
+#   
+#   return(returnList)
+#   
+#   
+# }
+
+toolboxSet = function(toolbox=TRUE, toolbox.x="left", toolbox.y="top", 
+                      orient=c("horizontal", "vertical"), 
+                      dataView=TRUE, readOnly=TRUE, mark = TRUE, 
+                      restore=TRUE, dataZoom=FALSE, saveAsImage=TRUE, magicType=FALSE)
+{  
   if (!dataView){
     returnList <- list(
-      show = ifelse(toolbox, "true", "false"),
+      show = toolbox,
       x = matchPos.x(toolbox.x), 
       y = matchPos.y(toolbox.y),
       orient = match.arg(orient),
       feature = list(
         mark = list(
-          show = ifelse(mark, "true", "false"),
+          show = mark,
           title = list(
             mark = 'Auxiliry Line Switch',
             markUndo = 'Remove Auxiliry Line',
             markClear = 'Clear All Auxiliry Lines'
-          )),
-        dataZoom = ifelse(dataZoom, "true", "false"),
-        magicType = magicType,
-        restore = list(show=ifelse(restore, "true", "false"),
+          )
+        ),
+        dataZoom = list(
+          show = dataZoom,
+          title = list(
+            dataZoom = 'Data Zoom',
+            dataZoomReset = 'Data Zoom Reset'
+          )
+        ),
+        magicType = list(
+          show = magicType,
+          title = list(
+            line = 'Line Switch',
+            bar = 'Bar Switch',
+            stack = 'Stack',
+            tiled = "Tile"
+          ),
+          type = c('line', 'bar', 'stack', 'tiled')
+        ),
+        restore = list(show=restore,
                        title='Restore'),
-        saveAsImage = ifelse(saveAsImage, "true", "false")
+        saveAsImage = list(
+          show = saveAsImage,
+          title = 'Save as Image',
+          type = 'png',
+          lang = c('Click to Save')
+        )
       )
     )
   }else{
     returnList <- list(
-      show = ifelse(toolbox, "true", "false"),
+      show = toolbox,
       x = matchPos.x(toolbox.x), 
       y = matchPos.y(toolbox.y),
       orient = match.arg(orient),
       feature = list(
         mark = list(
-          show = ifelse(mark, "true", "false"),
+          show = mark,
           title = list(
             mark = 'Auxiliry Line Switch',
             markUndo = 'Remove Auxiliry Line',
             markClear = 'Clear All Auxiliry Lines'
-            )),
-        dataZoom = ifelse(dataZoom, "true", "false"),
-        magicType = magicType,
-        restore = list(show=ifelse(restore, "true", "false"),
+          )
+        ),
+        dataZoom = list(
+          show = dataZoom,
+          title = list(
+            dataZoom = 'Data Zoom',
+            dataZoomReset = 'Data Zoom Reset'
+          )
+        ),
+        magicType = list(
+          show = magicType,
+          title = list(
+            line = 'Line Switch',
+            bar = 'Bar Switch',
+            stack = 'Stack',
+            tiled = "Tile"
+          ),
+          type = c('line', 'bar', 'stack', 'tiled')
+        ),
+        restore = list(show=restore,
                        title='Restore'),
-        dataView = list(readOnly = ifelse(readOnly, "true", "false")),
-        saveAsImage = ifelse(saveAsImage, "true", "false")
+        dataView = list(
+          show = dataView,
+          readOnly = readOnly,
+          title = 'Data View',
+          lang = c('Data View', 'close', 'refresh')
+        ),
+        saveAsImage = list(
+          show = saveAsImage,
+          title = 'Save as Image',
+          type = 'png',
+          lang = c('Click to Save')
+        )
       )
     )
   }
   
   return(returnList)
-  
-  
 }
 
 legendSet = function(legend=TRUE, data=NULL, orient = c("horizontal", "vertical"), legend.x="left", legend.y="top"){
